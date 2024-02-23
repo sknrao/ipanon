@@ -21,6 +21,9 @@ RUN cd check && autoreconf --install && ./configure && make && make install
 RUN cd libdnet && ./configure && make && make install
 RUN cd libdnet/python && python3 setup.py build && python3 setup.py install
 
+ADD ./scrub-tcpdump-optimized /anon/scrub-tcpdump
+RUN cd scrub-tcpdump && make
+
 RUN echo 'ping localhost &' > /bootstrap.sh
 RUN echo 'sleep infinity' >> /bootstrap.sh
 RUN chmod +x /bootstrap.sh
